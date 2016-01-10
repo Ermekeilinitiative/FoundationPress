@@ -37,14 +37,16 @@
 		<div class="title-bar" data-responsive-toggle="site-navigation">
 			<button class="menu-icon" type="button" data-toggle="offCanvas"></button>
 			<div class="title-bar-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+				<a href="<?php echo esc_url( network_home_url( '/' ) ); ?>" rel="home"><?php echo get_current_site()->site_name ?></a>
 			</div>
 		</div>
 
-		<nav id="site-navigation" class="main-navigation top-bar" role="navigation">
+		<nav id="site-navigation" class="main-navigation top-bar row" role="navigation">
 			<div class="top-bar-left show-for-medium">
 				<ul class="menu">
-					<li class="home"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></li>
+                    <!-- TODO: extract inline styles into CSS files -->
+					<li class="home"><a href="<?php echo esc_url( network_home_url( '/' ) ); ?>" rel="home" style="padding:0; height:auto;"><img alt="<?php echo get_current_site()->site_name ?>" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/Ermekeilinitiative-Logo-2x.png" style="width:340px;height:54px;margin-top:18px;" /></a></li>
+<!--					<?php foundationpress_top_bar_l(); ?>	-->
 				</ul>
 			</div>
 			<div class="top-bar-right">

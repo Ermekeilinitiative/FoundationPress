@@ -1,0 +1,40 @@
+@mixin box-shadow($offset-x: 0, $offset-y: 1px, $color: rgba(0,0,0,0.1)) {
+    -webkit-box-shadow: $offset-x $offset-y $color;
+    -moz-box-shadow: $offset-x $offset-y $color;
+    box-shadow: $offset-x $offset-y $color;
+}
+
+.site-header {
+    background-color: $white;
+    @include box-shadow();
+}
+
+.dropdown.menu .is-dropdown-submenu-parent.is-down-arrow > a::after {
+    top: 3px;
+    right: 0;
+}
+
+.button-blue a {
+    -webkit-transition:all .4s ease;
+    -moz-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    -ms-transition:all .4s ease;
+    transition:all .4s ease;
+
+    font-weight: $global-weight-bold;
+    color: $white !important;
+    text-align: center;
+    margin: 0 0 0 1.5rem;
+    padding: 0.875rem 2.5rem !important;
+    background: $blue;
+    border: 0.125rem solid transparent;
+    border-radius: 1000px;
+}
+
+.button-blue a:hover {
+    transform: scale(0.95);
+}
+
+.current-menu-item a {
+//    color: $dark-green !important;
+}

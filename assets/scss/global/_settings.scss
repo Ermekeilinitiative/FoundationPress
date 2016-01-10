@@ -47,26 +47,29 @@
 $global-width: rem-calc(1200);
 $global-font-size: 100%;
 $global-lineheight: 1.5;
-$primary-color: #2199e8;
+$primary-color: rgb(75,77,75);
 $secondary-color: #777;
 $success-color: #3adb76;
 $warning-color: #ffae00;
 $alert-color: #ec5840;
-$light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
-$black: #0a0a0a;
-$white: #fefefe;
+$light-gray: rgb(226, 231, 227);
+$medium-gray: rgb(139, 152, 158);
+$dark-gray: rgb(75, 77, 75);
+$black: #000;
+$white: #fff;
+$dark-green: rgb(61, 159, 52);
+$blue: rgb(0, 80, 139);
+$brown: rgb(147, 96, 55);
 $body-background: $white;
-$body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-color: $dark-gray;
+$body-font-family: 'Lato', sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
 $global-margin: 1rem;
-$global-weight-normal: normal;
-$global-weight-bold: bold;
-$global-radius: 0;
+$global-weight-normal: 400;
+$global-weight-bold: 700;
+$global-radius: 1000;
 $global-text-direction: ltr;
 $rem-base: 16px;
 
@@ -94,26 +97,29 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: $body-font-family;
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+$header-font-family: 'Varela Round', sans-serif;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
 $header-sizes: (
   small: (
-    'h1': 24,
-    'h2': 20,
-    'h3': 19,
-    'h4': 18,
-    'h5': 17,
-    'h6': 16,
+    'h1': 2rem,
+    'h2': 2rem,
+    'h3': 1.25rem,
+    'h4': 0.875rem,
+    'h5': 0.875rem,
+    'h6': 0.875rem
   ),
   medium: (
-    'h1': 48,
-    'h2': 40,
-    'h3': 31,
-    'h4': 25,
-    'h5': 20,
-    'h6': 16,
+    'h1': 2rem,
+    'h2': 2rem,
+    'h3': 1.25rem,
+    'h4': 0.875rem,
+    'h5': 0.875rem,
+    'h6': 0.875rem
   ),
 );
 $header-color: inherit;
@@ -538,6 +544,6 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0;
-$topbar-background: #121212;
-$topbar-link-color: #fff;
+$topbar-background: transparent;
+$topbar-link-color: $medium-gray;
 $topbar-input-width: 200px;
