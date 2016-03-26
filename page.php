@@ -15,6 +15,14 @@
 
  <?php get_template_part( 'parts/featured-image' ); ?>
 
+ <div class="row small-12">
+	<?php
+        if(function_exists('bcn_display')) {
+            bcn_display();
+        }
+    ?>
+ </div>
+
  <div id="page" role="main">
 
  <?php do_action( 'foundationpress_before_content' ); ?>

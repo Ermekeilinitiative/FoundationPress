@@ -44,10 +44,10 @@
 // 1. Global
 // ---------
 
-$global-width: rem-calc(1200);
+$global-width: rem-calc(960);
 $global-font-size: 100%;
 $global-lineheight: 1.5;
-$primary-color: rgb(75,77,75);
+$primary-color: rgb(61, 159, 52);
 $secondary-color: #777;
 $success-color: #3adb76;
 $warning-color: #ffae00;
@@ -60,8 +60,9 @@ $white: #fff;
 $dark-green: rgb(61, 159, 52);
 $blue: rgb(0, 80, 139);
 $brown: rgb(147, 96, 55);
+$purple: rgb(49, 39, 131);
 $body-background: $white;
-$body-font-color: $dark-gray;
+$body-font-color: $medium-gray;
 $body-font-family: 'Lato', sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -305,7 +306,7 @@ $dropdown-sizes: (
 $dropdownmenu-arrows: true;
 $dropdownmenu-min-width: 200px;
 $dropdownmenu-background: $white;
-$dropdownmenu-border: 1px solid $medium-gray;
+$dropdownmenu-border: 1px solid $light-gray;
 
 // 18. Flex Video
 // --------------

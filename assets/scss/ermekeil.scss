@@ -1,12 +1,67 @@
-@mixin box-shadow($offset-x: 0, $offset-y: 1px, $color: rgba(0,0,0,0.1)) {
+@mixin box-shadow($offset-x: 2px, $offset-y: 2px, $color: rgba(0,0,0,0.05)) {
     -webkit-box-shadow: $offset-x $offset-y $color;
     -moz-box-shadow: $offset-x $offset-y $color;
     box-shadow: $offset-x $offset-y $color;
 }
 
+/* ANIMATION-EFFECT FOR HYPERLINKS */
+a {
+    -webkit-transition:all .4s ease;
+    -moz-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    -ms-transition:all .4s ease;
+    transition:all .4s ease;
+}
+
 .site-header {
+    z-index: 20;
+    position: relative;
+    height: 90px;
     background-color: $white;
     @include box-shadow();
+}
+
+/* ERMEKEIL-LOGO IN NAVIGATION */
+li.home a {
+    height: auto;
+    padding: 0;
+}
+
+li.home a img {
+    width:340px;
+    height:54px;
+    margin-top:18px;
+}
+
+/* Social-Links in Topbar */
+ul.social-links {
+    z-index: 30;
+    position: absolute;
+    top: 1.40625rem;
+    right: 15px;
+    font-size: 1.5rem;
+    list-style: none;
+}
+
+ul.social-links li {
+    float: left;
+}
+
+ul.social-links li a {
+    color: $light-gray;
+    padding: 0.5rem 1rem;
+}
+
+ul.social-links li a.twitter:hover {
+    color: rgb(85,172,238);
+}
+
+ul.social-links li a.facebook:hover {
+    color: rgb(59,89,152);
+}
+
+ul.social-links li a.flickr:hover {
+    color: rgb(13,100,210);
 }
 
 .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow > a::after {
@@ -15,26 +70,625 @@
 }
 
 .button-blue a {
-    -webkit-transition:all .4s ease;
-    -moz-transition:all .4s ease;
-    -o-transition:all .4s ease;
-    -ms-transition:all .4s ease;
-    transition:all .4s ease;
-
     font-weight: $global-weight-bold;
     color: $white !important;
     text-align: center;
     margin: 0 0 0 1.5rem;
-    padding: 0.875rem 2.5rem !important;
+    padding: 0.725rem 1.875rem !important;
     background: $blue;
     border: 0.125rem solid transparent;
     border-radius: 1000px;
 }
 
 .button-blue a:hover {
-    transform: scale(0.95);
+    background-color: darken($blue, 5%);
 }
 
-.current-menu-item a {
-//    color: $dark-green !important;
+.active a {
+    color: $dark-green !important;
+}
+
+.menu-item-17 a {
+    color: $medium-gray !important;
+}
+
+
+/**********************
+ *  FRONT-PAGE STYLES  *
+ ***********************/
+
+.working-groups {
+    background-color: $light-gray;
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/background-blueprint.jpg);
+    background-position: center bottom;
+    background-size: 80rem;
+    background-repeat: no-repeat;
+}
+
+.section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.front-page-teaser {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    background-color: $dark-green;
+}
+
+.front-page-teaser:before {
+    z-index: 1;
+    content: ' ';
+    display: block;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.2;
+
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/teaser-frontpage.jpg);
+    background-repeat: no-repeat;
+    background-position: 20% center;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.welcome-text {
+    z-index: 10;
+    position: relative;
+
+    width: 100%;
+    max-width: 60rem;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    margin: 7rem auto;
+}
+
+.welcome-text a.button.white-ghost:hover {
+    color: $dark-green !important;
+}
+
+.front-page-teaser h1 {
+    color: $white;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.front-page-teaser h1:after {
+    content: "";
+    display: block;
+    height: 0.1875rem;
+    width: 2rem;
+    background-color: $white;
+    margin: 1rem auto;
+}
+
+.front-page-teaser p.entry-text {
+    font-family: $header-font-family;
+    color: $white;
+    font-size: 2rem;
+    line-height: 1.4em;
+    text-align: center;
+    margin-bottom: 2rem;
+
+    hyphens: none;
+}
+
+body.home h2 {
+    text-align: center;
+}
+
+
+/*********************
+ *   SUB-PAGE-STYLES  *
+ *********************/
+.sub-page-teaser {
+    position: relative;
+
+    width: 100%;
+    height: 200px;
+
+    overflow: hidden;
+
+    background-color: $dark-green;
+}
+
+.sub-page-teaser:before {
+    z-index: 1;
+    content: ' ';
+    display: block;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.2;
+
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/teaser-frontpage.jpg);
+    background-repeat: no-repeat;
+    background-position: 20% center;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.sub-page-teaser .working-group {
+    z-index: 1;
+
+    position: relative;
+}
+
+.sub-page-teaser .working-group h1 {
+    color: $white;
+    text-align: center;
+}
+
+.sub-page-teaser .working-group ul {
+    color: $white;
+    font-size: 1.25rem;
+    text-align: center;
+
+    padding: 0;
+    margin: 0;
+}
+
+.sub-page-teaser .working-group ul li {
+    display: inline-block;
+    margin-right: 1rem;
+    list-style: none;
+}
+
+.sub-page-teaser .working-group ul li:last-child {
+    margin-right: 0;
+}
+
+.sub-page-teaser .working-group ul li a {
+    color: $white;
+
+    text-decoration: none;
+
+    border-bottom: 2px solid transparent;
+}
+
+.sub-page-teaser .working-group ul li a:hover {
+    color: $white;
+
+    border-bottom: 1px solid $white;
+}
+
+.dropdown, .submenu, .is-dropdown-submenu {
+    z-index: 3;
+}
+
+.valign-middle {
+    display: table;
+}
+
+.valign-middle .columns {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.valign-middle .columns,
+.valign-middle [class*="column"] + [class*="column"]:last-child {
+    float: none;
+}
+
+/**********************
+ *     TYPOGRAPHY      *
+ ***********************/
+
+h1.entry-title, h2 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 2rem;
+}
+
+h1.entry-title:after, h2:after {
+    content: "";
+    display: block;
+    height: 0.1875rem;
+    width: 2rem;
+    background-color: $light-gray;
+    margin: 1rem auto;
+}
+
+h1.dark-green, h2.dark-green {
+    color: $dark-green;
+}
+
+h1.blue, h2.blue {
+    color: $blue;
+}
+
+h1.brown, h2.brown {
+    color: $brown;
+}
+
+h1.brown:after, h2.brown:after {
+    background-color: $brown !important;
+}
+
+article h1, article h2, article h3 {
+    text-align: left !important;
+}
+
+article h1 {
+    color: $dark-green;
+    margin-bottom: 0rem !important;
+}
+
+article h1:after {
+    margin: 0.5em 0 !important;
+}
+
+article h2 {
+    font-size: 1.5rem;
+}
+
+article h2:after {
+    display: none;
+}
+
+p {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+
+/**********************
+ *       BUTTONS       *
+ ***********************/
+
+a.button {
+    display: inline-block;
+
+    font-size: 0.9375rem !important;
+    font-weight: $global-weight-bold;
+    color: $white;
+    text-align: center;
+
+    padding: 0.5rem 1.875rem;
+    margin-top: 0.625rem;
+
+    background: $dark-gray;
+
+    border: 0.125rem solid transparent;
+    border-radius: 1000px;
+}
+
+a.button:active {
+    transform: scale(0.75);
+}
+
+a.button.blue {
+    color: $white !important;
+    background: $blue;
+}
+
+a.button.blue:hover {
+    background-color: darken($blue, 7%);
+}
+
+a.button.blue-ghost {
+    color: $blue !important;
+    background: transparent;
+    border-color: $blue;
+}
+
+a.button.blue-ghost:hover {
+    color: $white !important;
+    background-color: $blue;
+}
+
+a.button.green {
+    color: $white !important;
+    background: $dark-green;
+}
+
+a.button.green:hover {
+    background-color: darken($dark-green, 7%);
+}
+
+a.button.green-ghost {
+    color: $dark-green !important;
+    background: transparent;
+    border-color: $dark-green;
+}
+
+a.button.green-ghost:hover {
+    color: $white !important;
+    background-color: $dark-green;
+}
+
+a.button.white {
+    color: $dark-gray !important;
+    background: $white;
+}
+
+a.button.white:hover {
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+a.button.white-ghost {
+    border: 0.125rem solid $white;
+    background: transparent;
+}
+
+a.button.white-ghost:hover {
+    color: $dark-gray !important;
+    background-color: $white;
+}
+
+a.button.brown {
+    color: $white !important;
+    background: $brown;
+}
+
+a.button.brown:hover {
+    background-color: darken($brown, 7%);
+}
+
+a.button.brown-ghost {
+    color: $brown !important;
+    background: transparent;
+    border-color: $brown;
+}
+
+a.button.brown-ghost:hover {
+    color: $white !important;
+    background-color: $brown;
+}
+
+
+/**********************
+ *     WHITE CARDS     *
+ ***********************/
+
+div.card {
+    margin-bottom: 30px;
+
+    background-color: $white;
+
+    border-radius: 2px;
+
+    overflow: hidden;
+
+    @include box-shadow();
+}
+
+div.card .text-content {
+    padding: 1.56rem 0.9375rem 0.5rem 0.9375rem;
+}
+
+div.card .text-content h3 {
+    color: $dark-gray;
+}
+
+div.card .text-content h4 {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+div.card .image-content {
+    border-radius: 2px;
+
+    overflow: hidden;
+
+    width: auto;
+    height: auto;
+}
+
+div.card .image-content img {
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition:all .4s ease;
+    -moz-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    -ms-transition:all .4s ease;
+    transition:all .4s ease;
+
+    transform: scale(1.0);
+}
+
+div.card:hover .image-content img {
+    transform: scale(1.5) rotate(-9deg);
+
+    border-radius: 2px;
+}
+
+
+/**********************
+ *   SCHEDULE-CARDS    *
+ ***********************/
+
+div.schedule-card {
+    min-height: 100px;
+
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+
+    overflow: hidden;
+    border-bottom: 1px solid $light-gray;
+
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/arrow-icon-2x.png);
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: right 1.25rem;
+
+    -webkit-transition:all .4s ease;
+    -moz-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    -ms-transition:all .4s ease;
+    transition:all .4s ease;
+}
+
+.column a:hover div.schedule-card {
+    opacity: 0.9;
+
+    background-position: 98% 1.25rem;
+}
+
+div.schedule-card div.calendar-sheet {
+    display: block;
+
+    float: left;
+
+    width: 2.75rem;
+    height: 3.875rem;
+
+    overflow: hidden;
+
+    border: 1px solid $blue;
+    border-radius: 2px;
+
+    background-color: $white;
+}
+
+div.schedule-card div.calendar-sheet span.month {
+    display: block;
+
+    width: 100%;
+    height: 1.375rem;
+
+    color: $white;
+    font-weight: $global-weight-bold;
+    font-size: 0.75rem;
+    line-height: 1.4rem;
+    text-align: center;
+
+    background-color: $blue;
+}
+
+div.schedule-card div.calendar-sheet span.day {
+    display: block;
+
+    width: 100%;
+    height: 2.375rem;
+
+    font-family: $header-font-family;
+    color: $dark-gray;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+div.schedule-card div.schedule-text {
+    float: left;
+    position: relative;
+    top: -0.25rem;
+    left: 1rem;
+
+    width: 70%;
+    max-height: 4.5rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.schedule-card div.schedule-text span.schedule-location {
+    display: block;
+
+    font-size: 0.875rem;
+    color: $medium-gray !important;
+    font-weight: $global-weight-bold;
+}
+
+div.schedule-card div.schedule-text span.schedule-title {
+    display: block;
+
+    font-family: $header-font-family;
+    color: $dark-gray;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+}
+
+/**********************
+ *  FOOTER / DONATION  *
+ ***********************/
+
+.donation-request {
+    height: 7.5rem;
+    width: 100%;
+    display: table;
+
+    background-color: $purple;
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/background-donate.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.donation-request .row {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.donation-request span {
+    font-size: 2rem;
+    font-family: $header-font-family;
+    color: $white;
+    text-align: left;
+
+    margin: 0;
+    padding: 0;
+}
+
+.donation-request a.button.white-ghost {
+    position: relative;
+    top: -0.3125rem;
+    margin: 0 0 0 3.75rem;
+}
+
+.donation-request a.button.white-ghost:hover {
+    color: $purple !important;
+    background-color: $white;
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+    .donation-request  {
+        padding: 1.25rem 2.5rem;
+    }
+
+    .donation-request a.button.white-ghost {
+        margin: 1rem 0 0 0;
+    }
+
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+
+/**************************************
+ *     STYLES FOR FULL-WIDTH PAGES     *
+ **************************************/
+
+body.page-template-page-full-width {
+
+    article header {
+        position: sticky;
+        top: 90px;
+        left: 0;
+        width: 100vw;
+        height: 200px;
+        background-color: #ff0099;
+    }
+
 }

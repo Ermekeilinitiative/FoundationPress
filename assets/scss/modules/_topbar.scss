@@ -3,14 +3,15 @@
   .menu .home a {
     font-size: 1rem;
     color: #B9B9B9;
+    padding-left: 0 !important; /* No padding-left for Logo */
   }
 
   .top-bar-right .menu-item {
-      padding: 1.4rem 0;
+      padding: 1.5rem 0;
   }
 
   .menu a {
-    color: $dark-gray;
+    color: $medium-gray;
     padding-top: 0;
     padding-bottom: 0;
     font-size: 0.9375rem;
@@ -46,7 +47,6 @@
   .dropdown.menu .has-submenu.is-down-arrow>a::after {
 //    border: 0;
   }
-
 
 }
 
