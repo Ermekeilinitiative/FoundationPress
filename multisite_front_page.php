@@ -26,6 +26,12 @@ get_header(); ?>
 	</div>
 </div>
 
+<div class="row expanded front-page-alert">
+	<div class="small-12 columns">
+		<p class="text-center"><strong>Hinweis:</strong> Am 24.04.2016 findet vor Haus 8 ein <a href="#">Pfannkuchen-Wettessen</a> statt. Bitte tragt Hosen mit Gummibund.</p>
+	</div>
+</div>
+
 <?php ### Introduction: based on a (separate) page 'initiative' ?>
 <div class="row section">
 	<div class="small-12 columns text-center">
@@ -180,23 +186,31 @@ echo EM_Events::output($args);
 	</div>
 </div>
 
-<!--
+<?php ### Latest Network Blog Posts ?>
 <div id="page" role="main">
 	<article class="main-content">
-	<?php if ( have_posts() ) : ?>
 
-		<?php /* Start the Loop */ ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'content', get_post_format() ); ?>
-		<?php endwhile; ?>
+<?php
+$network_id = get_current_blog_id();
+$sites = wp_get_sites();
 
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
+# Display six latest blog entries.
+$posts = get_posts_for_sites($sites, 6);
 
-		<?php endif; // End have_posts() check. ?>
-	</article>
+foreach($posts as $post) {
+    switch_to_blog($post->site_id);
+    setup_postdata($post);
+    get_template_part('content', get_post_format());
+#    wp_reset_postdata();
+}
+switch_to_blog($network_id);
 
+if(empty($posts)) {
+    get_template_part('content', 'none');
+}
+?>
+
+    </article>
 </div>
--->
 
 <?php get_footer(); ?>
