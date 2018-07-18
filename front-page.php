@@ -1,5 +1,7 @@
 <?php
 /**
+ * Template Name: Front Page
+ *
  * The main template file
  *
  * This is the most generic template file in a WordPress theme
@@ -16,206 +18,152 @@
 
 get_header(); ?>
 
-<div class="row expanded sub-page-teaser valign-middle">
-	<div class="working-group columns">
-		<h1><?php echo get_bloginfo( 'name' ); ?></h1>
-		<ul class="sub-navi">
-            <li><a href="">Flüchtlingsarbeit</a></li>
-            <li><a href="">Repair Café Bonn</a></li>
-            <li><a href="">Ermekeilgarten</a></li>
-            <li><a href="">Kulturveranstaltungen</a></li>
-        </ul>
-	</div>
+<div class="row expanded front-page-teaser" style="height: auto;">
+    <div class="welcome-text">
+        <h1><?php echo get_bloginfo(); ?></h1>
+    </div>
+    <!-- Vorlage: '/home/daniel/freizeit/ermekeilkarree/wordpress/Material Michael/Ermekeilinitiative Website Desktop-Tablet Wireframe3.jpg' -->
+    <!-- TODO: check the following classes and which CSS get applied when switching to next version of Foundation -->
+    <div class="site menu-centered">
+    <?php
+        wp_nav_menu(array(
+            'container' => true,                           // Remove nav container
+            'menu_class' => 'menu',                        // Adding custom nav class
+            'items_wrap'     => '<ul id="%1$s" class="%2$s show-for-medium" data-dropdown-menu>%3$s</ul>',
+            'theme_location' => 'site',                     // Where it's located in the theme
+            'depth' => 1,                                   // Limit the depth of the nav
+            'fallback_cb' => false,                         // Fallback function (see below)
+            'walker' => new Foundationpress_Top_Bar_Walker(),
+        ));
+    ?>
+    </div>
 </div>
 
-<div id="page" role="main">
-	<article class="main-content">
-	<?php if ( have_posts() ) : ?>
+<?php ### Introduction: based on the static page ?>
+<?php do_action( 'foundationpress_before_content' ); ?>
+<?php while ( have_posts() ) : the_post(); ?>
+<div class="section">
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <h2 class="dark-green"><?php the_title(); ?></h2>
+    </div>
 
-		<?php /* Start the Loop */ ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'content', get_post_format() ); ?>
-		<?php endwhile; ?>
-		
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
+    <div class="small-12 columns">
+        <?php get_template_part( 'parts/featured-image' ); ?>
+    </div>
+</div>
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <?php do_action( 'foundationpress_page_before_entry_content' ); ?>
+        <?php the_content(); ?>
+    </div>
+</div>
+</div>
+<?php endwhile; ?>
+<?php do_action( 'foundationpress_after_content' ); ?>
 
-		<?php endif; // End have_posts() check. ?>
+<?php ### Veranstaltungen: based on Events Manager Plugin http://wp-events-plugin.com/ ?>
+<div class="row section" id="termine" style="border-top: 1px solid #e2e7e3;">
+    <h2 class="blue">
+        <?php
+            echo get_the_title(get_page_by_path('veranstaltungen'));
+        ?>
+    </h2>
 
-		<?php /* Display navigation to next/previous pages when applicable */ ?>
-		<?php if ( function_exists( 'foundationpress_pagination' ) ) { foundationpress_pagination(); } else if ( is_paged() ) { ?>
-			<nav id="post-nav">
-				<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'foundationpress' ) ); ?></div>
-				<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
-			</nav>
-		<?php } ?>
+    <div class="small-up-1 medium-up-2 large-up-3" style="max-width: 990px; margin: 0 auto;">
+        <?php
+        $args = array(
+            'category' => '-7',  # Exclude category garden. TODO: this should only exclude Gartenöffnungszeiten and be customizable!
+            'limit' => 6,
+            'pagination' => false,
+            'format' =>
+                '<div class="column vevent">
+                    <a href="#_EVENTURL" class="url">
+                        <div class="schedule-card">
+                            <div class="calendar-sheet">
+                                <time class="dtstart" datetime="#@Y-#@m-#@d">
+                                    <span class="month">#@M.</span>
+                                    <span class="day">#@d</span>
+                                </time>
+                            </div>
+                            <div class="schedule-text">
+                                <span class="schedule-location location">#_EVENTTIMES</span>
+                                <span class="schedule-title summary">#_EVENTNAME</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>'
+            );
+            echo EM_Events::output($args);
+        ?>
+    </div>
 
-	</article>
-	<?php get_sidebar(); ?>
+    <?php # Gartenöffnungszeiten berechnet aus Gartenevents
+    #TODO if(blog id === zwischennutzung)
+    /*
+    ?>
+    <div class="small-12 column callout text-center">
+        <strong>Gartenöffnungszeiten:</strong><br />
+        <?php
+            $events = get_garden_opening();
+            foreach($events as $days => $times) {
+                $opening = [];
+                for($i = 0; $i < count($times); $i+=2) {
+                    array_push($opening, substr($times[$i], 0, -3) . '-' . substr($times[$i+1], 0, -3) . ' Uhr');
+                }
 
+                if($times) {
+                    echo $days . ' ' . join($opening, ', ') . '<br />';
+                } else {
+                    echo $days . ' geschlossen' . '<br />';
+                }
+            }
+        ?>
+    </div>
+    */ ?>
+
+    <div class="columns end">
+        <p class="text-center">
+            <a href="veranstaltungen/" class="button blue-ghost">Alle Termine anzeigen</a>
+        </p>
+    </div>
 </div>
 
-<div class="row expanded section working-groups" id="arbeitsgruppen">
-	<div class="small-up-1 medium-up-2 large-up-3" style="max-width: 990px; margin: 0 auto;">
-		<h2 class="dark-green">Themengruppen der <?php echo get_bloginfo( 'name' ); ?></h2>
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>AG Zwischennutzung</h3>
-					<h4>Von der Kaserne zum Karree</h4>
-					<p>
-					Themen: Flüchtlingshilfe, Urban Gardening, Konzerte, Kunstausstellungen, Repair Café usw.
-					</p>
-					<p>
-					<a href="#" title="AG Zwischennutzung">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
 
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>AG Wohnen</h3>
-					<h4>Von der Kaserne zum Karree</h4>
-					<p>
-					Themen: Gemeinschaftliche Wohnprojekte, gefördeter Wohnungsbau, Städtebau, Barrierefreies Bauen usw.
-					</p>
-					<p>
-					<a href="#" title="AG Wohnen">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
+<?php ### Latest Blog Posts ?>
+<div class="expanded row section" role="main" style="border-top: 1px solid #e2e7e3;">
+    <h2 style="margin-top: 1rem;">Neueste Beiträge</h2>
 
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>AG „Q“ – Quartier &amp; Kultur</h3>
-					<h4>Von der Kaserne zum Karree</h4>
-					<p>
-					Themen: Bau-Workshops, Ideenfindung und -umsetzung, Quartiersentwicklung usw.
-					</p>
-					<p>
-					<a href="#" title="AG Quartier & Kultur">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
+    <article class="small-up-1 medium-up-2" style="max-width: 990px; margin: 0 auto; display: flex; flex-wrap: wrap;">
+        <?php
+        # Display six latest blog entries.
+        $args = array(
+            'numberposts' => 6
+        );
+        $posts = get_posts( $args );
 
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>AG Öffentlichkeitsarbeit</h3>
-					<h4>Unser Sprachrohr</h4>
-					<p>
-					Themen: Betreuung der Website, Gestaltung von Druckmaterial, Beschilderung, Pressearbeit usw.
-					</p>
-					<p>
-					<a href="#" title="AG Öffentlichkeitsarbeit">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
+        foreach($posts as $post) {
+            setup_postdata($post);
+            # Use content.php or content-<post_format>.php to render the post's content.
+            get_template_part('teaser', get_post_format());
+#           wp_reset_postdata();
+        }
 
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>TG Flüchtlingsarbeit</h3>
-					<h4>Für unsere neuen Nachbarn</h4>
-					<p>
-					Themen: Kleiderkammer, Deutschunterricht, Kontakt Café, Kinderbetreuung usw.
-					</p>
-					<p>
-					<a href="#" title="TG Flüchtlingsarbeit">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
+        if(empty($posts)) {
+            get_template_part('content', 'none');
+        }
+        ?>
+    </article>
 
-		<div class="column">
-			<div class="card">
-				<div class="image-content">
-					<a href="#" title="">
-					<img src="http://placehold.it/600x400" alt="" />
-					</a>
-				</div>
-				<div class="text-content">
-					<h3>Das Repair Café Bonn</h3>
-					<h4>BürgerInnen helfen BürgerInnen</h4>
-					<p>
-					Die ehrenamtlichen Helfer reparieren zusammen mit Ihnen kaputte Gegenstände, die Sie mitbringen.
-					</p>
-					<p>
-					<a href="#" title="Repair Café Bonn">Mehr erfahren ›</a>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div>
-			<p class="text-center">
-			<a href="#" class="button brown-ghost">Arbeitsgruppen anzeigen</a>
-			</p>
-		</div>
-	</div>
+    <div class="columns end">
+        <p class="text-center">
+<?php
+            # We expect a static page "Blog" to be used as the "Posts page". Most
+            # probably, the corresponding URL may be retrieved from Wordpress.
+?>
+            <a href="blog/" class="button green-ghost">Alle Beiträge anzeigen</a>
+        </p>
+    </div>
 </div>
-
-<div class="row section">
-	<div class="small-12 columns">
-		<h2 class="blue">Die nächsten Termine und Veranstaltungen</h2>
-		<p>
-		Kalender-Modul
-		</p>
-		<div>
-			<p class="text-center">
-			<a href="#" class="button blue-ghost">Alle Termine anzeigen</a>
-			</p>
-		</div>
-	</div>
-</div>
-
-<!--
-<div id="page" role="main">
-	<article class="main-content">
-	<?php if ( have_posts() ) : ?>
-
-		<?php /* Start the Loop */ ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'content', get_post_format() ); ?>
-		<?php endwhile; ?>
-
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
-
-		<?php endif; // End have_posts() check. ?>
-	</article>
-
-</div>
--->
 
 <?php get_footer(); ?>

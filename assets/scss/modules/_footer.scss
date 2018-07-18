@@ -2,17 +2,50 @@
 	max-width: 100%;
 	width: 100%;
 	margin: 0 auto;
-	border-top: 1px solid #ccc;
-	margin-top: rem-calc(60);
+
+	font-size: 0.875rem;
+	color: $dark-gray;
+	background-color: $light-gray;
 
 	#footer {
 		@include grid-row();
-		padding: rem-calc(30) 0;
+		padding: 2.5rem 0 5rem 0;
+
+		p {
+			margin-bottom: 0.35rem;
+		}
 
 		ul {
 			list-style-type: none;
+			line-height: 1.75rem;
 			margin: 0;
 			padding: 0;
+		}
+
+		.column:first-child strong:first-child {
+			color: $purple;
+		}
+
+		ul li a {
+			color: inherit;
+			padding: 0.5rem 0;
+		}
+
+		ul li a:hover {
+			color: $purple;
+		}
+
+		.logo-wrapper {
+			width: 54px;
+			height: 54px;
+			overflow: hidden;
+			margin-bottom: 1.25rem;
+		}
+
+		.logo-wrapper img.logo {
+			height: 54px;
+			width: 341px;
+			max-width: 341px;
 		}
 	}
 }

@@ -13,11 +13,18 @@ a {
     transition:all .4s ease;
 }
 
+.title-bar {
+    .title-bar-title {
+	width: calc(100% - 4rem);
+    }
+}
+
 .site-header {
-    z-index: 20;
+    z-index: 2;
     position: relative;
     height: 90px;
     background-color: $white;
+    // TODO: because of the z-index this shadow is currently visible in the mobile nav menu
     @include box-shadow();
 }
 
@@ -67,7 +74,10 @@ ul.social-links li a.flickr:hover {
 .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow > a::after {
     top: 3px;
     right: 0;
+    border-color: $light-gray transparent transparent !important;
 }
+
+
 
 .button-blue a {
     font-weight: $global-weight-bold;
@@ -105,6 +115,10 @@ ul.social-links li a.flickr:hover {
     background-repeat: no-repeat;
 }
 
+.working-groups .column {
+    margin-bottom: 2rem;
+}
+
 .section {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
@@ -115,21 +129,61 @@ ul.social-links li a.flickr:hover {
     height: 450px;
     overflow: hidden;
     position: relative;
-    background-color: $dark-green;
+    z-index: 1;
 }
 
-.front-page-teaser:before {
-    z-index: 1;
-    content: ' ';
+.front-page-teaser:before, .front-page-teaser:after {
+    content: '';
     display: block;
-
     position: absolute;
-    left: 0;
     top: 0;
-
-    width: 100%;
+    left: 0;
     height: 100%;
+    width: 100%;
+}
 
+// Use :before to lay down a subtle green background animation, and :after
+// to stack an image with opacity on it. Using :before AND :after guarantees
+// that content still has opaque background by default. See:
+// https://css-tricks.com/snippets/css/transparent-background-images/
+.front-page-teaser:before {
+    z-index: -2;
+
+    background: $dark-green;
+    // TODO: I don't see the animation!? Maybe it is too subtle?
+    // Removing the 0deg, resetting the size and the animation duration seem to make a different.
+    background: linear-gradient(0deg, #87b60e, #3d9f34);
+    background-size: 100% 400%;
+
+    -webkit-animation: AnimationName 60s ease infinite;
+    -moz-animation: AnimationName 60s ease infinite;
+    -o-animation: AnimationName 60s ease infinite;
+    animation: AnimationName 60s ease infinite;
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:50% 0%}
+        50%{background-position:50% 20%}
+        100%{background-position:50% 0%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:50% 0%}
+        50%{background-position:50% 20%}
+        100%{background-position:50% 0%}
+    }
+    @-o-keyframes AnimationName {
+        0%{background-position:50% 0%}
+        50%{background-position:50% 20%}
+        100%{background-position:50% 0%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:50% 0%}
+        50%{background-position:50% 20%}
+        100%{background-position:50% 0%}
+    }
+}
+
+.front-page-teaser:after {
+    z-index: -1;
     opacity: 0.2;
 
     background-image: url(/wp-content/themes/FoundationPress/assets/images/teaser-frontpage.jpg);
@@ -150,7 +204,7 @@ ul.social-links li a.flickr:hover {
     max-width: 60rem;
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
-    margin: 7rem auto;
+    margin: 7rem auto 2rem;
 }
 
 .welcome-text a.button.white-ghost:hover {
@@ -180,15 +234,100 @@ ul.social-links li a.flickr:hover {
     line-height: 1.4em;
     text-align: center;
     margin-bottom: 2rem;
-
     hyphens: none;
+}
+
+.front-page-alert {
+    color: $black;
+    padding: 1rem 1rem;
+    background-color: #FFEB3B; /* If color is approved/accepted, add to standard color palette */
+    /*text-shadow: 0 1px 0 #000;*/
+}
+
+.front-page-alert p {
+    margin: 0;
+    margin-top: -2px;
+}
+
+.front-page-alert a {
+    color: $blue;
+    text-decoration: underline !important;
 }
 
 body.home h2 {
     text-align: center;
 }
 
+.site {
+    background: $medium-gray;
+}
+.site .menu {
+    display: table;
+    margin: 0 auto;
+}
+.site .menu a {
+    color: $white;
+}
+.site .menu a:hover {
+    color: $blue;
+}
+.site .menu li:nth-last-child(n+2) a:after {
+    color: $white;
+    content: '|';
+    left: 1rem;
+    position: relative;
+}
 
+.off-canvas {
+    background: $light-gray;
+    height: 100%;
+    overflow: visible;
+    position: absolute;
+    right: 0;
+
+    > .menu {
+	// TODO: make this an inner shadow
+	@include box-shadow(-2px);
+    }
+
+    .menu {
+	min-width: 16rem;
+	padding-left: 1rem;
+	padding-top: 0.5rem;
+
+	li:nth-last-child(n+2) {
+	    border-bottom: 1px solid $white;
+	}
+
+	a {
+	    color: $dark-gray;
+	    padding-left: 0 !important;
+	    text-transform: uppercase;
+	}
+    }
+
+    .has-submenu {
+	.menu, .menu li:last-child {
+	    padding-bottom: 0;
+	}
+	.menu a {
+	    text-transform: none;
+	}
+    }
+
+    .button-blue a {
+	margin-left: 0;
+    }
+}
+
+// Off-canvas up/down arrows for submenus
+.is-accordion-submenu-parent > a:after {
+    background-image: url(/wp-content/themes/FoundationPress/assets/images/Menu-Arrow-up-Icon-2x.png);
+    background-size: cover;
+    border: none;
+    height: 9px;
+    width: 17px;
+}
 /*********************
  *   SUB-PAGE-STYLES  *
  *********************/
@@ -464,19 +603,27 @@ a.button.brown-ghost:hover {
  ***********************/
 
 div.card {
-    margin-bottom: 30px;
-
     background-color: $white;
-
     border-radius: 2px;
-
+    height: 100%;
+    margin-bottom: 30px;
     overflow: hidden;
+    padding-bottom: 1.56rem;
+    position: relative;
 
     @include box-shadow();
 }
 
 div.card .text-content {
     padding: 1.56rem 0.9375rem 0.5rem 0.9375rem;
+}
+
+/* Align "Mehr erfahren..." link to the bottom of the card. */
+div.card>p:last-child {
+    bottom: 1.56rem;
+    margin: 0;
+    padding: 0 0.9375rem;
+    position: absolute;
 }
 
 div.card .text-content h3 {
@@ -494,7 +641,7 @@ div.card .image-content {
     overflow: hidden;
 
     width: auto;
-    height: auto;
+    height: 200px;
 }
 
 div.card .image-content img {
@@ -511,7 +658,7 @@ div.card .image-content img {
 }
 
 div.card:hover .image-content img {
-    transform: scale(1.5) rotate(-9deg);
+    transform: scale(1.1);
 
     border-radius: 2px;
 }
@@ -528,6 +675,7 @@ div.schedule-card {
     margin-bottom: 2.5rem;
 
     overflow: hidden;
+/*
     border-bottom: 1px solid $light-gray;
 
     background-image: url(/wp-content/themes/FoundationPress/assets/images/arrow-icon-2x.png);
@@ -546,6 +694,7 @@ div.schedule-card {
     opacity: 0.9;
 
     background-position: 98% 1.25rem;
+*/
 }
 
 div.schedule-card div.calendar-sheet {
@@ -622,9 +771,68 @@ div.schedule-card div.schedule-text span.schedule-title {
     line-height: 1.625rem;
 }
 
-/**********************
+
+/*****************************
+ *  NEWSLETTER-REGISTRATION  *
+ *****************************/
+
+.newsletter-registration {
+	color: $white;
+	padding: 1rem 2rem;
+	margin-bottom: 1.5rem;
+	border-radius: 5px;
+	background-color: $blue;
+}
+
+.newsletter-registration h3 {
+	padding-bottom: 0.25rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.newsletter-registration p {
+	font-size: 0.875rem;
+	hyphens: none;
+	-webkit-hyphens: none;
+}
+
+.newsletter-registration p.small {
+	font-size: 0.75rem;
+	margin: 0;
+}
+
+.newsletter-registration a {
+	color: $white;
+	text-decoration: underline;
+}
+
+.newsletter-registration input {
+	border: 0;
+	margin: 0;
+}
+
+.newsletter-registration input[type="submit"] {
+	font-weight: 800;
+	height: 39px;
+	padding: 0 1rem;
+	border-radius: 0px 10px 10px 0;
+	margin-bottom: 0.75rem;
+	background-color: $dark-green;
+}
+
+.newsletter-registration input[type="submit"]:hover {
+    background-color: lighten($dark-green, 5%);
+}
+
+
+/***********************
  *  FOOTER / DONATION  *
  ***********************/
+
+footer abbr {
+	text-decoration: none;
+	color: $dark-gray;
+	border-bottom: 0;
+}
 
 .donation-request {
     height: 7.5rem;
@@ -641,6 +849,7 @@ div.schedule-card div.schedule-text span.schedule-title {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+    text-shadow: 0 1px 0 #000;
 }
 
 .donation-request span {
@@ -662,6 +871,7 @@ div.schedule-card div.schedule-text span.schedule-title {
 .donation-request a.button.white-ghost:hover {
     color: $purple !important;
     background-color: $white;
+    text-shadow: 0 0 0 #000;
 }
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {

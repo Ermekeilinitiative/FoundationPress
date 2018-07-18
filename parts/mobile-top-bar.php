@@ -9,6 +9,6 @@
 
 ?>
 
-<nav class="vertical menu" data-accordion-menu role="navigation">
+<nav class="off-canvas vertical menu" data-accordion-menu role="navigation">
   <?php foundationpress_mobile_nav(); ?>
 </nav>

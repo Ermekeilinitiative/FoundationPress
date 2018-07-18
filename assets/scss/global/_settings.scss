@@ -58,6 +58,7 @@ $dark-gray: rgb(75, 77, 75);
 $black: #000;
 $white: #fff;
 $dark-green: rgb(61, 159, 52);
+$light-green: rgb(135, 182, 14);
 $blue: rgb(0, 80, 139);
 $brown: rgb(147, 96, 55);
 $purple: rgb(49, 39, 131);
@@ -521,12 +522,12 @@ $thumbnail-radius: $global-radius;
 // 33. Title Bar
 // -------------
 
-$titlebar-background: $black;
-$titlebar-color: $white;
+$titlebar-background: $white;
+$titlebar-color: $black;
 $titlebar-padding: 0.5rem;
 $titlebar-text-font-weight: bold;
-$titlebar-icon-color: $white;
-$titlebar-icon-color-hover: $medium-gray;
+$titlebar-icon-color: $medium-gray;
+$titlebar-icon-color-hover: $dark-gray;
 $titlebar-icon-spacing: 0.25rem;
 
 // 34. Tooltip
