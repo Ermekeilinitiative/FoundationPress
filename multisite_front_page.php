@@ -18,8 +18,9 @@ get_header(); ?>
 
 <div class="row expanded front-page-teaser">
     <div class="welcome-text">
-        <h1><?php echo get_bloginfo(); ?></h1>
-        <p class="entry-text"><?php echo get_option('blog_long_description'); ?></p>
+	<h1><?php echo get_global_title(); ?></h1>
+        <?php /* TODO: change following element to p.h1 with newer Foundation */ ?>
+        <h2 class="entry-text"><?php echo get_option('blog_long_description'); ?></h2>
         <p class="text-center">
         <a href="#" class="button white-ghost">Mehr erfahren</a>
         </p>
@@ -72,7 +73,7 @@ get_header(); ?>
 ?>
         <p style="margin-top: 2rem;">
         <a href="initiative#ziele" class="button green-ghost">Unsere Ziele</a>
-        <a href="#" class="button blue" style="margin-left: 2rem;">Mitglied werden</a>
+        <a href="#" class="button blue">Mitglied werden</a>
         </p>
     </div>
 </div>
@@ -267,8 +268,8 @@ get_header(); ?>
 
 
 <?php ### Latest Network Blog Posts ?>
-<div class="expanded row section" id="page" role="main" style="border-top: 1px solid #e2e7e3;">
-    <h2 style="margin-top: 1rem;">Neueste Beiträge</h2>
+<div class="row section" role="main" style="border-top: 1px solid #e2e7e3;">
+    <h2>Neueste Beiträge</h2>
 
 <!--    <article class="main-content">-->
     <article class="small-up-1 medium-up-2" style="max-width: 990px; margin: 0 auto; display: flex; flex-wrap: wrap;">

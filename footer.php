@@ -14,12 +14,9 @@
 		</section>
 
 		<div class="row expanded donation-request">
-				<div class="row small-12 columns" style="max-width: 990px; margin: 0 auto;">
-					<span>
-						Unterstützen Sie unsere Arbeit mit einer Spende.
-					</span>
-                    <div class="clearfix show-for-medium-only"></div>
-					<a href="#" title="Jetzt Spenden" class="button white-ghost">Jetzt Spenden</a>
+				<div class="row small-12 columns">
+					Unterstützen Sie unsere Arbeit mit einer Spende.
+					<p><a href="#" title="Jetzt Spenden" class="button white-ghost">Jetzt Spenden</a></p>
 				</div>
 		</div>
 
